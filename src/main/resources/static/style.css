@@ -1,0 +1,122 @@
+/* Fondo */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url('/images/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Barra superior */
+.menu {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 28px;
+}
+
+/* Contenedor tarjetas */
+.contenedor {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 120px;
+}
+
+/* Tarjetas */
+.tarjeta {
+    width: 260px;
+    height: 200px;
+    background: rgba(180, 0, 0, 0.7);
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 20px;
+    transition: 0.3s;
+}
+
+.tarjeta:hover {
+    background: rgba(180, 0, 0, 0.95);
+    transform: scale(1.05);
+}
+
+.tarjeta img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.tarjeta h2 {
+    margin: 0;
+}
+
+/* Tablas */
+table {
+    width: 70%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+th {
+    background: #2c3e50;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+/* Formularios */
+form {
+    width: 40%;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.9);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+/* Botones */
+button {
+    background: #c0392b;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #e74c3c;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #c0392b;
+}
+
+a:hover {
+    color: #e74c3c;
+}
+
+/* Títulos */
+h1 {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+}

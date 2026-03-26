@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Cliente</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="menu">
+    AlquilaTusVehiculos
+    <br>
+    <a href="/">Inicio</a> |
+    <a href="/clientes">Clientes</a> |
+    <a href="/vehiculos">Vehículos</a> |
+    <a href="/alquileres">Alquileres</a>
+
+</div>
+
+<h1>Crear Cliente</h1>
+
+<form th:action="@{/clientes}" th:object="${cliente}" method="post">
+    DNI: <input type="text" th:field="*{dni}" /><br>
+    Nombre: <input type="text" th:field="*{nombre}" /><br>
+    Apellidos: <input type="text" th:field="*{apellidos}" /><br>
+    Email: <input type="text" th:field="*{email}" /><br>
+    Telefono: <input type="text" th:field="*{telefono}" /><br>
+    <button type="submit">Guardar</button>
+</form>
+
+<a href="/clientes">Volver</a>
+
+</body>
+</html>

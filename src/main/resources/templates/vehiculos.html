@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vehiculos</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="menu">
+    AlquilaTusVehiculos
+    <br>
+    <a href="/">Inicio</a> |
+    <a href="/clientes">Clientes</a> |
+    <a href="/vehiculos">Vehículos</a> |
+    <a href="/alquileres">Alquileres</a>
+
+</div>
+<h1>Vehiculos</h1>
+
+<a href="/vehiculos/nuevo">Nuevo vehiculo</a>
+
+<table border="1">
+    <tr>
+        <th>Matricula</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Precio</th>
+        <th>Disponible</th>
+        <th>Eliminar</th>
+    </tr>
+
+    <tr th:each="vehiculo : ${vehiculos}">
+        <td th:text="${vehiculo.matricula}"></td>
+        <td th:text="${vehiculo.marca}"></td>
+        <td th:text="${vehiculo.modelo}"></td>
+        <td th:text="${vehiculo.precioPorDia}"></td>
+        <td th:text="${vehiculo.disponible}"></td>
+        <td>
+            <a th:href="@{/vehiculos/eliminar/{id}(id=${vehiculo.id})}">Eliminar</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
