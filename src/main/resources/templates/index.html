@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>AlquilaTusVehiculos</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Inicio</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
-<div class="menu">
-    AlquilaTusVehiculos
-    <br>
-    <a href="/">Inicio</a> |
-    <a href="/clientes">Clientes</a> |
-    <a href="/vehiculos">Vehículos</a> |
-    <a href="/alquileres">Alquileres</a>
-
-</div>
-
-<div class="menu">
-    AlquilaTusVehiculos
+<div class="navbar">
+    <h1>AlquilaTusVehiculos</h1>
+    <div class="menu">
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/clientes}">Clientes</a>
+        <a th:href="@{/vehiculos}">Vehículos</a>
+        <a th:href="@{/alquileres}">Alquileres</a>
+    </div>
 </div>
 
 <div class="contenedor">
-
-    <a href="/clientes" class="tarjeta">
-        CLIENTES
+    <a th:href="@{/clientes}" class="tarjeta">
+        <img th:src="@{/images/clientes.png}" alt="Clientes" class="icono">
+        <h2>CLIENTES</h2>
     </a>
 
-    <a href="/vehiculos" class="tarjeta">
-        VEHÍCULOS
+    <a th:href="@{/vehiculos}" class="tarjeta">
+        <img th:src="@{/images/vehiculos.png}" class="icono">
+        <h2>VEHÍCULOS</h2>
     </a>
 
-    <a href="/alquileres" class="tarjeta">
-        ALQUILERES
+    <a th:href="@{/alquileres}" class="tarjeta">
+        <img th:src="@{/images/alquileres.png}" alt="Alquileres" class="icono">
+        <h2>ALQUILERES</h2>
     </a>
-
 </div>
 
 </body>

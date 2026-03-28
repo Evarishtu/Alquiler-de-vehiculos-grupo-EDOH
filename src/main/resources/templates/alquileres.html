@@ -2,43 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Alquileres</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<div class="menu">
-    AlquilaTusVehiculos
-    <br>
-    <a href="/">Inicio</a> |
-    <a href="/clientes">Clientes</a> |
-    <a href="/vehiculos">Vehículos</a> |
-    <a href="/alquileres">Alquileres</a>
 
+<div class="navbar">
+    <h1>AlquilaTusVehiculos</h1>
+    <div class="menu">
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/clientes}">Clientes</a>
+        <a th:href="@{/vehiculos}">Vehículos</a>
+        <a th:href="@{/alquileres}">Alquileres</a>
+    </div>
 </div>
 
-<h1>Alquileres</h1>
+<div class="container">
+    <h2>Alquileres</h2>
 
-<a href="/alquileres/nuevo">Nuevo alquiler</a>
+    <div class="boton-container">
+        <a th:href="@{/alquileres/nuevo}" class="boton">Nuevo alquiler</a>
+    </div>
 
-<table border="1">
-    <tr>
-        <th>Cliente</th>
-        <th>Vehiculo</th>
-        <th>Fecha Inicio</th>
-        <th>Fecha Fin</th>
-        <th>Eliminar</th>
-    </tr>
+    <div class="tabla-container">
+        <table>
+            <tr>
+                <th>Cliente</th>
+                <th>Vehículo</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Eliminar</th>
+            </tr>
+            <tr th:each="alquiler : ${alquileres}">
+                <td th:text="${alquiler.cliente.nombre}"></td>
+                <td th:text="${alquiler.vehiculo.matricula}"></td>
+                <td th:text="${alquiler.fechaInicio}"></td>
+                <td th:text="${alquiler.fechaFin}"></td>
+                <td>
+                    <a th:href="@{/alquileres/eliminar/{id}(id=${alquiler.id})}" class="boton-eliminar">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-    <tr th:each="alquiler : ${alquileres}">
-        <td th:text="${alquiler.cliente.nombre}"></td>
-        <td th:text="${alquiler.vehiculo.matricula}"></td>
-        <td th:text="${alquiler.fechaInicio}"></td>
-        <td th:text="${alquiler.fechaFin}"></td>
-        <td>
-            <a th:href="@{/alquileres/eliminar/{id}(id=${alquiler.id})}">Eliminar</a>
-        </td>
-    </tr>
-
-</table>
+</div>
 
 </body>
 </html>

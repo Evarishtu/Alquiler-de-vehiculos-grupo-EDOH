@@ -2,31 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Crear Cliente</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<div class="menu">
-    AlquilaTusVehiculos
-    <br>
-    <a href="/">Inicio</a> |
-    <a href="/clientes">Clientes</a> |
-    <a href="/vehiculos">Vehículos</a> |
-    <a href="/alquileres">Alquileres</a>
 
+<div class="navbar">
+    <h1>AlquilaTusVehiculos</h1>
 </div>
 
-<h1>Crear Cliente</h1>
+<div class="container">
+    <h2>Crear Cliente</h2>
 
-<form th:action="@{/clientes}" th:object="${cliente}" method="post">
-    DNI: <input type="text" th:field="*{dni}" /><br>
-    Nombre: <input type="text" th:field="*{nombre}" /><br>
-    Apellidos: <input type="text" th:field="*{apellidos}" /><br>
-    Email: <input type="text" th:field="*{email}" /><br>
-    Telefono: <input type="text" th:field="*{telefono}" /><br>
-    <button type="submit">Guardar</button>
-</form>
+    <form th:action="@{/clientes/guardar}" method="post">
+        Nombre: <input type="text" name="nombre"><br>
+        Email: <input type="text" name="email"><br><br>
+        <button type="submit" class="boton">Guardar</button>
+    </form>
 
-<a href="/clientes">Volver</a>
+    <br>
+    <a th:href="@{/clientes}" class="boton">Volver</a>
+</div>
 
 </body>
 </html>

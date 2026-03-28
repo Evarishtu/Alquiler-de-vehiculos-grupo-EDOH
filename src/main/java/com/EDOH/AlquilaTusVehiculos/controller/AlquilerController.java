@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/alquileres")
 public class AlquilerController {
 
     @Autowired
@@ -21,28 +22,28 @@ public class AlquilerController {
     @Autowired
     private VehiculoRepository vehiculoRepository;
 
-    @GetMapping("/alquileres")
-    public String listarAlquileres(Model model){
+    @GetMapping
+    public String listarAlquileres(Model model) {
         model.addAttribute("alquileres", alquilerRepository.findAll());
         return "alquileres";
     }
 
-    @GetMapping("/alquileres/nuevo")
-    public String mostrarFormulario(Model model){
+    @GetMapping("/nuevo")
+    public String nuevoAlquiler(Model model) {
         model.addAttribute("alquiler", new Alquiler());
         model.addAttribute("clientes", clienteRepository.findAll());
         model.addAttribute("vehiculos", vehiculoRepository.findAll());
         return "crearAlquiler";
     }
 
-    @PostMapping("/alquileres")
-    public String guardarAlquiler(@ModelAttribute Alquiler alquiler){
+    @PostMapping("/guardar")
+    public String guardarAlquiler(@ModelAttribute Alquiler alquiler) {
         alquilerRepository.save(alquiler);
         return "redirect:/alquileres";
     }
 
-    @GetMapping("/alquileres/eliminar/{id}")
-    public String eliminarAlquiler(@PathVariable Long id){
+    @GetMapping("/eliminar/{id}")
+    public String eliminarAlquiler(@PathVariable Long id) {
         alquilerRepository.deleteById(id);
         return "redirect:/alquileres";
     }

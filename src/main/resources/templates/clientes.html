@@ -2,38 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Clientes</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<div class="menu">
-    AlquilaTusVehiculos
-    <br>
-    <a href="/">Inicio</a> |
-    <a href="/clientes">Clientes</a> |
-    <a href="/vehiculos">Vehículos</a> |
-    <a href="/alquileres">Alquileres</a>
 
+<div class="navbar">
+    <h1>AlquilaTusVehiculos</h1>
+    <div class="menu">
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/clientes}">Clientes</a>
+        <a th:href="@{/vehiculos}">Vehículos</a>
+        <a th:href="@{/alquileres}">Alquileres</a>
+    </div>
 </div>
 
-<h1>Clientes</h1>
+<div class="container">
+    <h2>Clientes</h2>
 
-<a href="/clientes/nuevo">Nuevo cliente</a>
+    <div class="boton-container">
+        <a th:href="@{/clientes/nuevo}" class="boton">Nuevo cliente</a>
+    </div>
 
-<table border="1">
-    <tr>
-        <th>Nombre</th>
-        <th>Email</th>
-        <th>Eliminar</th>
-    </tr>
+    <div class="tabla-container">
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Eliminar</th>
+            </tr>
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.nombre}"></td>
+                <td th:text="${cliente.email}"></td>
+                <td>
+                    <a th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}" class="boton-eliminar">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-    <tr th:each="cliente : ${clientes}">
-        <td th:text="${cliente.nombre}"></td>
-        <td th:text="${cliente.email}"></td>
-        <td>
-            <a th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}">Eliminar</a>
-        </td>
-    </tr>
-</table>
+</div>
 
 </body>
 </html>

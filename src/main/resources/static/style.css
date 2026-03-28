@@ -1,122 +1,226 @@
-/* Fondo */
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-image: url('/images/fondo.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-/* Barra superior */
-.menu {
-    background: rgba(0, 0, 0, 0.7);
+    font-family: Arial, sans-serif;
     color: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 28px;
+    background: url("/images/fondo.jpg") no-repeat center center fixed;
+    background-size: cover;
 }
 
-/* Contenedor tarjetas */
+/* Capa oscura sobre el fondo */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: -1;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.82);
+    padding: 15px;
+    text-align: center;
+}
+
+.navbar h1 {
+    margin: 0;
+}
+
+.menu {
+    margin-top: 10px;
+}
+
+.menu a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+/* CONTENIDO GENERAL */
+.container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* TARJETAS DEL INICIO */
 .contenedor {
     display: flex;
     justify-content: center;
-    gap: 60px;
-    margin-top: 120px;
+    gap: 50px;
+    margin-top: 80px;
+    flex-wrap: wrap;
 }
 
-/* Tarjetas */
 .tarjeta {
-    width: 260px;
-    height: 200px;
-    background: rgba(180, 0, 0, 0.7);
-    color: white;
+    width: 240px;
+    height: 260px;
+    background: rgba(255, 255, 255, 0.16);
     border-radius: 20px;
     text-align: center;
     text-decoration: none;
-    padding-top: 20px;
+    color: white;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
     transition: 0.3s;
+    padding-top: 25px;
 }
 
 .tarjeta:hover {
-    background: rgba(180, 0, 0, 0.95);
     transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.24);
 }
 
-.tarjeta img {
-    width: 80px;
-    margin-bottom: 15px;
+.icono {
+    width: 110px;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .tarjeta h2 {
-    margin: 0;
+    margin-top: 10px;
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+/* FORMULARIOS CENTRADOS */
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }
 
-/* Tablas */
+form {
+    background-color: rgba(0,0,0,0.6);
+    padding: 25px;
+    border-radius: 12px;
+    min-width: 300px;
+    text-align: left;
+}
+/* BOTONES */
+.boton-container {
+    margin: 20px;
+}
+
+.boton {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.boton:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+.boton-volver {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.boton-volver:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+/* TABLAS */
+.tabla-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 table {
-    width: 70%;
-    margin: 40px auto;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
     border-collapse: collapse;
-    background: rgba(255, 255, 255, 0.9);
+    min-width: 700px;
+}
+
+th, td {
+    padding: 12px 20px;
+    border: 1px solid rgba(255,255,255,0.15);
 }
 
 th {
-    background: #2c3e50;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.boton-eliminar {
+    background-color: rgba(255, 0, 0, 0.6);
+    padding: 6px 12px;
+    border-radius: 6px;
     color: white;
-    padding: 10px;
+    text-decoration: none;
 }
 
-td {
-    padding: 10px;
-    text-align: center;
+.boton-eliminar:hover {
+    background-color: rgba(255, 0, 0, 0.8);
 }
 
-table, th, td {
-    border: 1px solid #ccc;
-}
-
-/* Formularios */
+/* FORMULARIOS */
 form {
-    width: 40%;
-    margin: 40px auto;
-    background: rgba(255,255,255,0.9);
-    padding: 20px;
-    border-radius: 10px;
+    background-color: rgba(0,0,0,0.6);
+    padding: 25px;
+    border-radius: 12px;
+    display: inline-block;
+    min-width: 350px;
+    text-align: left;
 }
 
 input, select {
     width: 100%;
+    margin: 6px 0 14px 0;
     padding: 8px;
-    margin-bottom: 10px;
+    border-radius: 6px;
+    border: none;
+    box-sizing: border-box;
 }
 
-/* Botones */
 button {
-    background: #c0392b;
-    color: white;
-    border: none;
-    padding: 10px;
     width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
-    background: #e74c3c;
+    background-color: rgba(255,255,255,0.35);
 }
-
-/* Links */
-a {
-    text-decoration: none;
-    color: #c0392b;
-}
-
-a:hover {
-    color: #e74c3c;
-}
-
-/* Títulos */
-h1 {
-    text-align: center;
-    color: white;
+/* FORMULARIOS CENTRADOS */
+.form-container {
+    display: flex;
+    justify-content: center;
     margin-top: 30px;
+}
+
+form {
+    background-color: rgba(0,0,0,0.6);
+    padding: 25px;
+    border-radius: 12px;
+    min-width: 300px;
+    text-align: left;
 }

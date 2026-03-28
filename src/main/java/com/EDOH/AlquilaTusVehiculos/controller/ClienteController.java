@@ -8,31 +8,32 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/clientes")
 public class ClienteController {
 
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @GetMapping("/clientes")
-    public String listarClientes(Model model){
+    @GetMapping
+    public String listarClientes(Model model) {
         model.addAttribute("clientes", clienteRepository.findAll());
         return "clientes";
     }
 
-    @GetMapping("/clientes/nuevo")
-    public String mostrarFormulario(Model model){
+    @GetMapping("/nuevo")
+    public String nuevoCliente(Model model) {
         model.addAttribute("cliente", new Cliente());
         return "crearCliente";
     }
 
-    @PostMapping("/clientes")
-    public String guardarCliente(@ModelAttribute Cliente cliente){
+    @PostMapping("/guardar")
+    public String guardarCliente(@ModelAttribute Cliente cliente) {
         clienteRepository.save(cliente);
         return "redirect:/clientes";
     }
 
-    @GetMapping("/clientes/eliminar/{id}")
-    public String eliminarCliente(@PathVariable Long id){
+    @GetMapping("/eliminar/{id}")
+    public String eliminarCliente(@PathVariable Long id) {
         clienteRepository.deleteById(id);
         return "redirect:/clientes";
     }

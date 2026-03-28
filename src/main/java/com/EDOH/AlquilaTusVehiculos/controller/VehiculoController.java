@@ -8,31 +8,36 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/vehiculos")
 public class VehiculoController {
 
     @Autowired
     private VehiculoRepository vehiculoRepository;
 
-    @GetMapping("/vehiculos")
-    public String listarVehiculos(Model model){
+    // LISTAR VEHICULOS
+    @GetMapping
+    public String listarVehiculos(Model model) {
         model.addAttribute("vehiculos", vehiculoRepository.findAll());
         return "vehiculos";
     }
 
-    @GetMapping("/vehiculos/nuevo")
-    public String mostrarFormulario(Model model){
+    // FORMULARIO NUEVO VEHICULO
+    @GetMapping("/nuevo")
+    public String nuevoVehiculo(Model model) {
         model.addAttribute("vehiculo", new Vehiculo());
         return "crearVehiculo";
     }
 
-    @PostMapping("/vehiculos")
-    public String guardarVehiculo(@ModelAttribute Vehiculo vehiculo){
+    // GUARDAR VEHICULO
+    @PostMapping("/guardar")
+    public String guardarVehiculo(@ModelAttribute Vehiculo vehiculo) {
         vehiculoRepository.save(vehiculo);
         return "redirect:/vehiculos";
     }
 
-    @GetMapping("/vehiculos/eliminar/{id}")
-    public String eliminarVehiculo(@PathVariable Long id){
+    // ELIMINAR VEHICULO
+    @GetMapping("/eliminar/{id}")
+    public String eliminarVehiculo(@PathVariable Long id) {
         vehiculoRepository.deleteById(id);
         return "redirect:/vehiculos";
     }

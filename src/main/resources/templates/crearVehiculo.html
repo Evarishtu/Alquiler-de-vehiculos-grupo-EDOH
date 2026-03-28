@@ -1,34 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Crear Vehiculo</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Crear Vehículo</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
-<div class="menu">
-    AlquilaTusVehiculos
-    <br>
-    <a href="/">Inicio</a> |
-    <a href="/clientes">Clientes</a> |
-    <a href="/vehiculos">Vehículos</a> |
-    <a href="/alquileres">Alquileres</a>
-
+<div class="navbar">
+    <h1>AlquilaTusVehiculos</h1>
+    <div class="menu">
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/clientes}">Clientes</a>
+        <a th:href="@{/vehiculos}">Vehículos</a>
+        <a th:href="@{/alquileres}">Alquileres</a>
+    </div>
 </div>
 
-<h1>Crear Vehiculo</h1>
+<div class="container">
+    <h2>Crear Vehículo</h2>
 
-<form th:action="@{/vehiculos}" th:object="${vehiculo}" method="post">
-    Matricula: <input type="text" th:field="*{matricula}" /><br>
-    Marca: <input type="text" th:field="*{marca}" /><br>
-    Modelo: <input type="text" th:field="*{modelo}" /><br>
-    Color: <input type="text" th:field="*{color}" /><br>
-    Precio por día: <input type="text" th:field="*{precioPorDia}" /><br>
-    Disponible: <input type="checkbox" th:field="*{disponible}" /><br>
-    <button type="submit">Guardar</button>
-</form>
+    <div class="form-container">
+        <form th:action="@{/vehiculos/guardar}" th:object="${vehiculo}" method="post">
+            <label>Matrícula</label>
+            <input type="text" th:field="*{matricula}">
 
-<a href="/vehiculos">Volver</a>
+            <label>Marca</label>
+            <input type="text" th:field="*{marca}">
+
+            <label>Modelo</label>
+            <input type="text" th:field="*{modelo}">
+
+            <label>Color</label>
+            <input type="text" th:field="*{color}">
+
+            <label>Precio por día</label>
+            <input type="text" th:field="*{precioPorDia}">
+
+            <label>Disponible</label>
+            <input type="checkbox" th:field="*{disponible}">
+
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+
+    <div class="boton-container">
+        <a th:href="@{/vehiculos}" class="boton">Volver</a>
+    </div>
+</div>
 
 </body>
 </html>

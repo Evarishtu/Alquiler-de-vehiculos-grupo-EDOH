@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Vehiculos</title>
-    <link rel="stylesheet" href="/style.css">
+    <title>Vehículos</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
-<div class="menu">
-    AlquilaTusVehiculos
-    <br>
-    <a href="/">Inicio</a> |
-    <a href="/clientes">Clientes</a> |
-    <a href="/vehiculos">Vehículos</a> |
-    <a href="/alquileres">Alquileres</a>
-
+<div class="navbar">
+    <h1>AlquilaTusVehiculos</h1>
+    <div class="menu">
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/clientes}">Clientes</a>
+        <a th:href="@{/vehiculos}">Vehículos</a>
+        <a th:href="@{/alquileres}">Alquileres</a>
+    </div>
 </div>
-<h1>Vehiculos</h1>
 
-<a href="/vehiculos/nuevo">Nuevo vehiculo</a>
+<div class="container">
+    <h2>Vehículos</h2>
 
-<table border="1">
-    <tr>
-        <th>Matricula</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Precio</th>
-        <th>Disponible</th>
-        <th>Eliminar</th>
-    </tr>
+    <div class="boton-container">
+        <a th:href="@{/vehiculos/nuevo}" class="boton">Nuevo vehículo</a>
+    </div>
 
-    <tr th:each="vehiculo : ${vehiculos}">
-        <td th:text="${vehiculo.matricula}"></td>
-        <td th:text="${vehiculo.marca}"></td>
-        <td th:text="${vehiculo.modelo}"></td>
-        <td th:text="${vehiculo.precioPorDia}"></td>
-        <td th:text="${vehiculo.disponible}"></td>
-        <td>
-            <a th:href="@{/vehiculos/eliminar/{id}(id=${vehiculo.id})}">Eliminar</a>
-        </td>
-    </tr>
-</table>
+    <div class="tabla-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Matrícula</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Precio</th>
+                <th>Disponible</th>
+                <th>Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="vehiculo : ${vehiculos}">
+                <td th:text="${vehiculo.matricula}"></td>
+                <td th:text="${vehiculo.marca}"></td>
+                <td th:text="${vehiculo.modelo}"></td>
+                <td th:text="${vehiculo.precioPorDia}"></td>
+                <td th:text="${vehiculo.disponible}"></td>
+                <td>
+                    <a th:href="@{/vehiculos/eliminar/{id}(id=${vehiculo.id})}" class="boton-eliminar">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

@@ -2,47 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Crear Alquiler</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<div class="menu">
-    AlquilaTusVehiculos
-    <br>
-    <a href="/">Inicio</a> |
-    <a href="/clientes">Clientes</a> |
-    <a href="/vehiculos">Vehículos</a> |
-    <a href="/alquileres">Alquileres</a>
 
+<div class="navbar">
+    <h1>AlquilaTusVehiculos</h1>
 </div>
 
-<h1>Crear Alquiler</h1>
+<div class="container">
+    <h2>Crear Alquiler</h2>
 
-<form th:action="@{/alquileres}" th:object="${alquiler}" method="post">
+    <form th:action="@{/alquileres/guardar}" method="post">
+        Cliente:
+        <select name="cliente.id">
+            <option th:each="cliente : ${clientes}"
+                    th:value="${cliente.id}"
+                    th:text="${cliente.nombre}">
+            </option>
+        </select><br>
 
-    Cliente:
-    <select th:field="*{cliente}">
-        <option th:each="c : ${clientes}" th:value="${c}" th:text="${c.nombre}"></option>
-    </select>
+        Vehículo:
+        <select name="vehiculo.id">
+            <option th:each="vehiculo : ${vehiculos}"
+                    th:value="${vehiculo.id}"
+                    th:text="${vehiculo.matricula}">
+            </option>
+        </select><br>
+
+        Fecha inicio: <input type="date" name="fechaInicio"><br>
+        Fecha fin: <input type="date" name="fechaFin"><br><br>
+
+        <button type="submit" class="boton">Guardar</button>
+    </form>
+
     <br>
-
-    Vehiculo:
-    <select th:field="*{vehiculo}">
-        <option th:each="v : ${vehiculos}" th:value="${v}" th:text="${v.matricula}"></option>
-    </select>
-    <br>
-
-    Fecha inicio:
-    <input type="date" th:field="*{fechaInicio}" />
-    <br>
-
-    Fecha fin:
-    <input type="date" th:field="*{fechaFin}" />
-    <br>
-
-    <button type="submit">Guardar</button>
-</form>
-
-<a href="/alquileres">Volver</a>
+    <a th:href="@{/alquileres}" class="boton">Volver</a>
+</div>
 
 </body>
 </html>
