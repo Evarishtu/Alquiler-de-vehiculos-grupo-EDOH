@@ -35,6 +35,14 @@ public class VehiculoController {
         return "redirect:/vehiculos";
     }
 
+    // EDITAR VEHICULO
+    @GetMapping("/editar/{id}")
+    public String editarVehiculo(@PathVariable Long id, Model model){
+        Vehiculo vehiculo = vehiculoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id de vehículo no válido: " + id));
+        model.addAttribute("vehiculo", vehiculo);
+        return "crearVehiculo";
+    }
+
     // ELIMINAR VEHICULO
     @GetMapping("/eliminar/{id}")
     public String eliminarVehiculo(@PathVariable Long id) {

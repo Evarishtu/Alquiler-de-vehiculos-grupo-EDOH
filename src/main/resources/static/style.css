@@ -140,6 +140,29 @@ form {
     background-color: rgba(255, 255, 255, 0.35);
 }
 
+.boton-eliminar {
+    background-color: rgba(255, 0, 0, 0.6);
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+}
+
+.boton-eliminar:hover {
+    background-color: rgba(255, 0, 0, 0.8);
+}
+.boton-editar {
+    background-color: rgba(0, 0, 255, 0.6);
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+}
+
+.boton-editar:hover {
+    background-color: rgba(0, 0, 255, 0.8);
+}
+
 /* TABLAS */
 .tabla-container {
     display: flex;
@@ -163,18 +186,6 @@ th, td {
 
 th {
     background-color: rgba(0,0,0,0.8);
-}
-
-.boton-eliminar {
-    background-color: rgba(255, 0, 0, 0.6);
-    padding: 6px 12px;
-    border-radius: 6px;
-    color: white;
-    text-decoration: none;
-}
-
-.boton-eliminar:hover {
-    background-color: rgba(255, 0, 0, 0.8);
 }
 
 /* FORMULARIOS */

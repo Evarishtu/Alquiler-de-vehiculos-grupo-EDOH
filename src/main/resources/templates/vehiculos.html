@@ -32,6 +32,7 @@
                 <th>Modelo</th>
                 <th>Precio</th>
                 <th>Disponible</th>
+                <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
             </thead>
@@ -40,8 +41,13 @@
                 <td th:text="${vehiculo.matricula}"></td>
                 <td th:text="${vehiculo.marca}"></td>
                 <td th:text="${vehiculo.modelo}"></td>
-                <td th:text="${vehiculo.precioPorDia}"></td>
+                <td th:text="${vehiculo.precioPorDia} + ' €'"></td>
                 <td th:text="${vehiculo.disponible}"></td>
+                <td>
+                    <a th:href="@{/vehiculos/editar/{id}(id=${vehiculo.id})}" class="boton-editar">
+                        Editar
+                    </a>
+                </td>
                 <td>
                     <a th:href="@{/vehiculos/eliminar/{id}(id=${vehiculo.id})}" class="boton-eliminar">
                         Eliminar

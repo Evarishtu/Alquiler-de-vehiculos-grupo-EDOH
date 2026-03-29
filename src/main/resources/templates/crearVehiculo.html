@@ -21,6 +21,8 @@
 
     <div class="form-container">
         <form th:action="@{/vehiculos/guardar}" th:object="${vehiculo}" method="post">
+            <input type="hidden" th:field="*{id}">
+
             <label>Matrícula</label>
             <input type="text" th:field="*{matricula}">
 

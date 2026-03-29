@@ -13,8 +13,10 @@
 <div class="container">
     <h2>Crear Alquiler</h2>
 
-    <form th:action="@{/alquileres/guardar}" method="post">
-        Cliente:
+    <form th:action="@{/alquileres/guardar}" th:object="${alquiler}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Cliente</label>
         <select name="cliente.id">
             <option th:each="cliente : ${clientes}"
                     th:value="${cliente.id}"
@@ -22,7 +24,7 @@
             </option>
         </select><br>
 
-        Vehículo:
+        <label>Vehículo</label>
         <select name="vehiculo.id">
             <option th:each="vehiculo : ${vehiculos}"
                     th:value="${vehiculo.id}"
@@ -30,8 +32,11 @@
             </option>
         </select><br>
 
-        Fecha inicio: <input type="date" name="fechaInicio"><br>
-        Fecha fin: <input type="date" name="fechaFin"><br><br>
+        <label>Fecha inicio</label>
+        <input type="date" th:field="*{fechaInicio}">
+
+        <label>Fecha fin</label>
+        <input type="date" th:field="*{fechaFin}">
 
         <button type="submit" class="boton">Guardar</button>
     </form>
