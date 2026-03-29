@@ -53,6 +53,9 @@ public class Cliente {
         return alquiler;
     }
 //    Setters
+    public void setId(Long id){
+        this.id = id;
+    }
     public void setDni(String dni){
         this.dni = dni;
     }

@@ -58,6 +58,9 @@ public class Alquiler {
         return vehiculo;
     }
 //    Setters
+    public void setId(Long id){
+        this.id = id;
+    }
     public void setNumeroPedido(String numeroPedido){
         this.numeroPedido = numeroPedido;
     }

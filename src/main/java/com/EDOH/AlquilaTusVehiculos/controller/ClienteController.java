@@ -32,6 +32,13 @@ public class ClienteController {
         return "redirect:/clientes";
     }
 
+    @GetMapping("/editar/{id}")
+    public String editarCliente(@PathVariable Long id, Model model){
+        Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id de cliente no válido: " + id));
+        model.addAttribute("cliente", cliente);
+        return "crearCliente";
+    }
+
     @GetMapping("/eliminar/{id}")
     public String eliminarCliente(@PathVariable Long id) {
         clienteRepository.deleteById(id);

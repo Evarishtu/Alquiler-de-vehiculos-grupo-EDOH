@@ -28,11 +28,17 @@
             <tr>
                 <th>Nombre</th>
                 <th>Email</th>
+                <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
             <tr th:each="cliente : ${clientes}">
                 <td th:text="${cliente.nombre}"></td>
                 <td th:text="${cliente.email}"></td>
+                <td>
+                    <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="boton-editar">
+                        Editar
+                    </a>
+                </td>
                 <td>
                     <a th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}" class="boton-eliminar">
                         Eliminar

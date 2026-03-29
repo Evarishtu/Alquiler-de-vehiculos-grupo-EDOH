@@ -30,6 +30,8 @@
                 <th>Vehículo</th>
                 <th>Fecha Inicio</th>
                 <th>Fecha Fin</th>
+                <th>PRecio Total</th>
+                <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
             <tr th:each="alquiler : ${alquileres}">
@@ -37,6 +39,12 @@
                 <td th:text="${alquiler.vehiculo.matricula}"></td>
                 <td th:text="${alquiler.fechaInicio}"></td>
                 <td th:text="${alquiler.fechaFin}"></td>
+                <td th:text="${#numbers.formatDecimal(alquiler.precioTotal, 1, 2)} + ' €'"></td>
+                <td>
+                    <a th:href="@{/alquileres/editar/{id}(id=${alquiler.id})}" class="boton-editar">
+                        Editar
+                    </a>
+                </td>
                 <td>
                     <a th:href="@{/alquileres/eliminar/{id}(id=${alquiler.id})}" class="boton-eliminar">
                         Eliminar
