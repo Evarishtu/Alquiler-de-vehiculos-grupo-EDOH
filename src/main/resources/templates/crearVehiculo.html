@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Vehículo</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+    <h1>AlquilaTusVehiculos</h1>
+    <div class="menu">
+        <a th:href="@{/}">Inicio</a>
+        <a th:href="@{/clientes}">Clientes</a>
+        <a th:href="@{/vehiculos}">Vehículos</a>
+        <a th:href="@{/alquileres}">Alquileres</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Crear Vehículo</h2>
+
+    <div class="form-container">
+        <form th:action="@{/vehiculos/guardar}" th:object="${vehiculo}" method="post">
+            <label>Matrícula</label>
+            <input type="text" th:field="*{matricula}">
+
+            <label>Marca</label>
+            <input type="text" th:field="*{marca}">
+
+            <label>Modelo</label>
+            <input type="text" th:field="*{modelo}">
+
+            <label>Color</label>
+            <input type="text" th:field="*{color}">
+
+            <label>Precio por día</label>
+            <input type="text" th:field="*{precioPorDia}">
+
+            <label>Disponible</label>
+            <input type="checkbox" th:field="*{disponible}">
+
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+
+    <div class="boton-container">
+        <a th:href="@{/vehiculos}" class="boton">Volver</a>
+    </div>
+</div>
+
+</body>
+</html>
