@@ -7,12 +7,12 @@
 <body>
 
 <div class="navbar">
-    <h1>AlquilaTusVehiculos</h1>
+    <h1>Panel Admin - AlquilaTusVehiculos</h1>
     <div class="menu">
         <a th:href="@{/}">Inicio</a>
-        <a th:href="@{/clientes}">Clientes</a>
-        <a th:href="@{/vehiculos}">Vehículos</a>
-        <a th:href="@{/alquileres}">Alquileres</a>
+        <a th:href="@{/admin/clientes}">Clientes</a>
+        <a th:href="@{/admin/vehiculos}">Vehículos</a>
+        <a th:href="@{/admin/alquileres}">Alquileres</a>
     </div>
 </div>
 
@@ -20,7 +20,7 @@
     <h2>Crear Vehículo</h2>
 
     <div class="form-container">
-        <form th:action="@{/vehiculos/guardar}" th:object="${vehiculo}" method="post">
+        <form th:action="@{/admin/vehiculos/guardar}" th:object="${vehiculo}" method="post">
             <input type="hidden" th:field="*{id}">
 
             <label>Matrícula</label>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="boton-container">
-        <a th:href="@{/vehiculos}" class="boton">Volver</a>
+        <a th:href="@{/admin/vehiculos}" class="boton">Volver</a>
     </div>
 </div>
 

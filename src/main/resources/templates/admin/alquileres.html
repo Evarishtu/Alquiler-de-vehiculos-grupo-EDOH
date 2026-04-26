@@ -7,12 +7,15 @@
 <body>
 
 <div class="navbar">
-    <h1>AlquilaTusVehiculos</h1>
+    <h1>Panel Admin - AlquilaTusVehiculos</h1>
     <div class="menu">
-        <a th:href="@{/}">Inicio</a>
-        <a th:href="@{/clientes}">Clientes</a>
-        <a th:href="@{/vehiculos}">Vehículos</a>
-        <a th:href="@{/alquileres}">Alquileres</a>
+        <a th:href="@{/admin}">Inicio</a>
+        <a th:href="@{/admin/clientes}">Clientes</a>
+        <a th:href="@{/admin/vehiculos}">Vehículos</a>
+        <a th:href="@{/admin/alquileres}">Alquileres</a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+            <button type="submit" class="logout-link">Cerrar sesión</button>
+        </form>
     </div>
 </div>
 
@@ -20,7 +23,7 @@
     <h2>Alquileres</h2>
 
     <div class="boton-container">
-        <a th:href="@{/alquileres/nuevo}" class="boton">Nuevo alquiler</a>
+        <a th:href="@{/admin/alquileres/nuevo}" class="boton">Nuevo alquiler</a>
     </div>
 
     <div class="tabla-container">
@@ -41,12 +44,12 @@
                 <td th:text="${alquiler.fechaFin}"></td>
                 <td th:text="${#numbers.formatDecimal(alquiler.precioTotal, 1, 2)} + ' €'"></td>
                 <td>
-                    <a th:href="@{/alquileres/editar/{id}(id=${alquiler.id})}" class="boton-editar">
+                    <a th:href="@{/admin/alquileres/editar/{id}(id=${alquiler.id})}" class="boton-editar">
                         Editar
                     </a>
                 </td>
                 <td>
-                    <a th:href="@{/alquileres/eliminar/{id}(id=${alquiler.id})}" class="boton-eliminar">
+                    <a th:href="@{/admin/alquileres/eliminar/{id}(id=${alquiler.id})}" class="boton-eliminar">
                         Eliminar
                     </a>
                 </td>

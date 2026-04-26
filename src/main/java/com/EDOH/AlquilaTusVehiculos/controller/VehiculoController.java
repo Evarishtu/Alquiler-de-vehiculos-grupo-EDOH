@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/vehiculos")
+@RequestMapping("/admin/vehiculos")
 public class VehiculoController {
 
     @Autowired
@@ -18,21 +18,21 @@ public class VehiculoController {
     @GetMapping
     public String listarVehiculos(Model model) {
         model.addAttribute("vehiculos", vehiculoRepository.findAll());
-        return "vehiculos";
+        return "admin/vehiculos";
     }
 
     // FORMULARIO NUEVO VEHICULO
     @GetMapping("/nuevo")
     public String nuevoVehiculo(Model model) {
         model.addAttribute("vehiculo", new Vehiculo());
-        return "crearVehiculo";
+        return "admin/crearVehiculo";
     }
 
     // GUARDAR VEHICULO
     @PostMapping("/guardar")
     public String guardarVehiculo(@ModelAttribute Vehiculo vehiculo) {
         vehiculoRepository.save(vehiculo);
-        return "redirect:/vehiculos";
+        return "redirect:/admin/vehiculos";
     }
 
     // EDITAR VEHICULO
@@ -40,13 +40,13 @@ public class VehiculoController {
     public String editarVehiculo(@PathVariable Long id, Model model){
         Vehiculo vehiculo = vehiculoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id de vehículo no válido: " + id));
         model.addAttribute("vehiculo", vehiculo);
-        return "crearVehiculo";
+        return "admin/crearVehiculo";
     }
 
     // ELIMINAR VEHICULO
     @GetMapping("/eliminar/{id}")
     public String eliminarVehiculo(@PathVariable Long id) {
         vehiculoRepository.deleteById(id);
-        return "redirect:/vehiculos";
+        return "redirect:/admin/vehiculos";
     }
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+    <h1>AlquilaTusVehiculos</h1>
+</div>
+
+<div class="container">
+    <h2>Registro de cliente</h2>
+
+    <div th:if="${error}" style="color: #ff6b6b; font-weight: bold;" th:text="${error}"></div>
+
+    <div class="form-container">
+        <form th:action="@{/registro}" method="post">
+
+            <h3>Datos de acceso</h3>
+
+            <label>Usuario</label>
+            <input type="text" name="username" required>
+
+            <label>Contraseña</label>
+            <input type="password" name="password" required>
+
+            <h3>Datos personales</h3>
+
+            <label>DNI</label>
+            <input type="text" name="dni" required>
+
+            <label>Nombre</label>
+            <input type="text" name="nombre" required>
+
+            <label>Apellidos</label>
+            <input type="text" name="apellidos" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Teléfono</label>
+            <input type="text" name="telefono">
+
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+
+    <div class="boton-container">
+        <a th:href="@{/login}" class="boton">Ya tengo cuenta</a>
+        <a th:href="@{/}" class="boton">Volver al inicio</a>
+    </div>
+</div>
+<body>
+

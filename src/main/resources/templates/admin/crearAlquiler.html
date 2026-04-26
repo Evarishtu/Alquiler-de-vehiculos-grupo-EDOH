@@ -7,13 +7,13 @@
 <body>
 
 <div class="navbar">
-    <h1>AlquilaTusVehiculos</h1>
+    <h1>Panel Admin - AlquilaTusVehiculos</h1>
 </div>
 
 <div class="container">
     <h2>Crear Alquiler</h2>
 
-    <form th:action="@{/alquileres/guardar}" th:object="${alquiler}" method="post">
+    <form th:action="@{/admin/alquileres/guardar}" th:object="${alquiler}" method="post">
         <input type="hidden" th:field="*{id}">
 
         <label>Cliente</label>
@@ -42,7 +42,7 @@
     </form>
 
     <br>
-    <a th:href="@{/alquileres}" class="boton">Volver</a>
+    <a th:href="@{/admin/alquileres}" class="boton">Volver</a>
 </div>
 
 </body>

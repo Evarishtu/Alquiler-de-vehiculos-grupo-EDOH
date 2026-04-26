@@ -30,6 +30,10 @@ public class Cliente {
 
     public Cliente(){
     }
+
+    @OneToOne
+    @JoinColumn(name = "usuario_id", unique = true)
+    private Usuario usuario;
 //    Getters
     public Long getId(){
         return id;
@@ -52,6 +56,9 @@ public class Cliente {
     public Alquiler getAlquiler(){
         return alquiler;
     }
+    public Usuario getUsuario(){
+        return usuario;
+    }
 //    Setters
     public void setId(Long id){
         this.id = id;
@@ -73,5 +80,8 @@ public class Cliente {
     }
     public void setAlquiler(Alquiler alquiler){
         this.alquiler = alquiler;
+    }
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
     }
 }
