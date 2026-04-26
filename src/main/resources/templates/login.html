@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+  <h1>AlquilaTusVehiculos</h1>
+</div>
+
+<div class="container">
+  <h2>Iniciar sesión</h2>
+
+  <div th:if="${param.error}" style="color: #ff6b6b; font-weight: bold;">
+    Usuario o contraseña incorrectos.
+  </div>
+
+  <div th:if="${param.logout}" style="color: lightgreen; font-weight: bold;">
+    Sesión cerrada correctamente.
+  </div>
+
+  <div th:if="${param.registro}" style="color: lightgreen; font-weight: bold;">
+    Usuario registrado correctamente. Ya puedes iniciar sesión.
+  </div>
+
+  <div class="form-container">
+    <form th:action="@{/login}" method="post">
+      <label>Usuario</label>
+      <input type="text" name="username" required>
+
+      <label>Contraseña</label>
+      <input type="password" name="password" required>
+
+      <button type="submit">Entrar</button>
+    </form>
+  </div>
+
+  <div class="boton-container">
+    <a th:href="@{/registro}" class="boton">Crear nuevo usuario</a>
+    <a th:href="@{/}" class="boton">Volver al inicio</a>
+  </div>
+</div>
+
+</body>
+</html>
