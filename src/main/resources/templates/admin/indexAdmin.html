@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Panel de administración</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="navbar">
+    <h1>Panel Admin - AlquilaTusVehiculos</h1>
+    <div class="menu">
+        <a th:href="@{/admin}">Inicio</a>
+        <a th:href="@{/admin/clientes}">Clientes</a>
+        <a th:href="@{/admin/vehiculos}">Vehículos</a>
+        <a th:href="@{/admin/alquileres}">Alquileres</a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+            <button type="submit" class="logout-link">Cerrar sesión</button>
+        </form>
+    </div>
+</div>
+
+<div class="contenedor">
+
+    <a th:href="@{/admin/clientes}" class="tarjeta">
+        <img th:src="@{/images/clientes.png}" alt="Clientes" class="icono">
+        <h2>CLIENTES</h2>
+    </a>
+
+    <a th:href="@{/admin/vehiculos}" class="tarjeta">
+        <img th:src="@{/images/vehiculos.png}" alt="Vehículos" class="icono">
+        <h2>VEHÍCULOS</h2>
+    </a>
+
+    <a th:href="@{/admin/alquileres}" class="tarjeta">
+        <img th:src="@{/images/alquileres.png}" alt="Alquileres" class="icono">
+        <h2>ALQUILERES</h2>
+    </a>
+
+</div>
+
+</body>
+</html>

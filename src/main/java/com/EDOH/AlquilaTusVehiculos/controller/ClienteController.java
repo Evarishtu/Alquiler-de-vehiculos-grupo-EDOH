@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/clientes")
+@RequestMapping("/admin/clientes")
 public class ClienteController {
 
     @Autowired
@@ -17,31 +17,40 @@ public class ClienteController {
     @GetMapping
     public String listarClientes(Model model) {
         model.addAttribute("clientes", clienteRepository.findAll());
-        return "clientes";
+        return "admin/clientes";
     }
 
     @GetMapping("/nuevo")
     public String nuevoCliente(Model model) {
         model.addAttribute("cliente", new Cliente());
-        return "crearCliente";
+        return "admin/crearCliente";
     }
 
     @PostMapping("/guardar")
     public String guardarCliente(@ModelAttribute Cliente cliente) {
+
+        if (cliente.getId() != null) {
+            Cliente clienteExistente = clienteRepository.findById(cliente.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Id de cliente no válido"));
+
+            cliente.setUsuario(clienteExistente.getUsuario());
+            cliente.setAlquiler(clienteExistente.getAlquiler());
+        }
+
         clienteRepository.save(cliente);
-        return "redirect:/clientes";
+        return "redirect:/admin/clientes";
     }
 
     @GetMapping("/editar/{id}")
     public String editarCliente(@PathVariable Long id, Model model){
         Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id de cliente no válido: " + id));
         model.addAttribute("cliente", cliente);
-        return "crearCliente";
+        return "admin/crearCliente";
     }
 
     @GetMapping("/eliminar/{id}")
     public String eliminarCliente(@PathVariable Long id) {
         clienteRepository.deleteById(id);
-        return "redirect:/clientes";
+        return "redirect:/admin/clientes";
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 
 @Controller
-@RequestMapping("/alquileres")
+@RequestMapping("/admin/alquileres")
 public class AlquilerController {
 
     @Autowired
@@ -29,15 +29,15 @@ public class AlquilerController {
     @GetMapping
     public String listarAlquileres(Model model) {
         model.addAttribute("alquileres", alquilerRepository.findAll());
-        return "alquileres";
+        return "admin/alquileres";
     }
 
     @GetMapping("/nuevo")
     public String nuevoAlquiler(Model model) {
         model.addAttribute("alquiler", new Alquiler());
-        model.addAttribute("clientes", clienteRepository.findAll());
+        model.addAttribute("clientes", clienteRepository.findByAlquilerIsNull());
         model.addAttribute("vehiculos", vehiculoRepository.findAll());
-        return "crearAlquiler";
+        return "admin/crearAlquiler";
     }
 
     @PostMapping("/guardar")
@@ -52,7 +52,13 @@ public class AlquilerController {
         alquiler.setVehiculo(vehiculo);
 
         // Numero pedido
-        alquiler.setNumeroPedido("PED-" + System.currentTimeMillis());
+        if (alquiler.getId() == null) {
+            alquiler.setNumeroPedido("PED-" + System.currentTimeMillis());
+        } else {
+            Alquiler alquilerExistente = alquilerRepository.findById(alquiler.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Id de alquiler no válido"));
+            alquiler.setNumeroPedido(alquilerExistente.getNumeroPedido());
+        }
         // Calcular precio total
         long dias = java.time.temporal.ChronoUnit.DAYS.between(
                 alquiler.getFechaInicio(),
@@ -61,24 +67,38 @@ public class AlquilerController {
         if (dias <= 0) dias = 1;
 
         BigDecimal precioTotal = vehiculo.getPrecioPorDia()
-                        .multiply(BigDecimal.valueOf(dias));
+                .multiply(BigDecimal.valueOf(dias));
         alquiler.setPrecioTotal(precioTotal);
 
+        vehiculo.setDisponible(false);
+        vehiculoRepository.save(vehiculo);
+
         alquilerRepository.save(alquiler);
-        return "redirect:/alquileres";
+        return "redirect:/admin/alquileres";
     }
 
     @GetMapping("/editar/{id}")
     public String editarAlquiler(@PathVariable Long id, Model model){
-        Alquiler alquiler = alquilerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id de alquiler no válido: " + id));
+        Alquiler alquiler = alquilerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Id de alquiler no válido: " + id));
+
         model.addAttribute("alquiler", alquiler);
         model.addAttribute("clientes", clienteRepository.findAll());
         model.addAttribute("vehiculos", vehiculoRepository.findAll());
-        return "crearAlquiler";
+
+        return "admin/crearAlquiler";
     }
     @GetMapping("/eliminar/{id}")
     public String eliminarAlquiler(@PathVariable Long id) {
-        alquilerRepository.deleteById(id);
-        return "redirect:/alquileres";
+        Alquiler alquiler = alquilerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Id de alquiler no válido: " + id));
+
+        Vehiculo vehiculo = alquiler.getVehiculo();
+        vehiculo.setDisponible(true);
+        vehiculoRepository.save(vehiculo);
+
+        alquilerRepository.delete(alquiler);
+
+        return "redirect:/admin/alquileres";
     }
 }
