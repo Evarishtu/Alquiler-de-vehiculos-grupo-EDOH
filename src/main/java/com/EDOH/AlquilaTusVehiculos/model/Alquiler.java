@@ -1,12 +1,11 @@
 package com.EDOH.AlquilaTusVehiculos.model;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table (name = "alquileres")
+@Table(name = "alquileres")
 public class Alquiler {
 
     @Id
@@ -33,50 +32,74 @@ public class Alquiler {
     @JoinColumn(name = "vehiculo_id", nullable = false, unique = true)
     private Vehiculo vehiculo;
 
-    public Alquiler(){
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    public Alquiler() {
     }
-//    Getters
-    public Long getId(){
+
+    public Long getId() {
         return id;
     }
-    public String getNumeroPedido(){
+
+    public String getNumeroPedido() {
         return numeroPedido;
     }
-    public LocalDate getFechaInicio(){
+
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
-    public LocalDate getFechaFin(){
+
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
-    public BigDecimal getPrecioTotal(){
+
+    public BigDecimal getPrecioTotal() {
         return precioTotal;
     }
-    public Cliente getCliente(){
+
+    public Cliente getCliente() {
         return cliente;
     }
-    public Vehiculo getVehiculo(){
+
+    public Vehiculo getVehiculo() {
         return vehiculo;
     }
-//    Setters
-    public void setId(Long id){
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public void setNumeroPedido(String numeroPedido){
+
+    public void setNumeroPedido(String numeroPedido) {
         this.numeroPedido = numeroPedido;
     }
-    public void setFechaInicio(LocalDate fechaInicio){
+
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
-    public void setFechaFin(LocalDate fechaFin){
+
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
-    public void setPrecioTotal(BigDecimal precioTotal){
+
+    public void setPrecioTotal(BigDecimal precioTotal) {
         this.precioTotal = precioTotal;
     }
-    public void setCliente(Cliente cliente){
+
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    public void setVehiculo(Vehiculo vehiculo){
+
+    public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
