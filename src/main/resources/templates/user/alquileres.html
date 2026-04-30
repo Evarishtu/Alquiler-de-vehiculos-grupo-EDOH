@@ -1,51 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Mi alquiler</title>
+    <title>Mis alquileres</title>
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
-<div class="navbar">
-    <h1>Zona Cliente - AlquilaTusVehiculos</h1>
-    <div class="menu">
-        <a th:href="@{/user}">Inicio</a>
-        <a th:href="@{/user/vehiculos}">Vehículos disponibles</a>
-        <a th:href="@{/user/alquileres}">Mi alquiler</a>
+<header>
+    <h1>AlquilaTusVehiculos</h1>
+</header>
 
-        <form th:action="@{/logout}" method="post" class="logout-form">
-            <button type="submit" class="logout-link">Cerrar sesión</button>
-        </form>
-    </div>
-</div>
+<main class="login-page">
+    <h2>Mis alquileres</h2>
 
-<div class="container">
-    <h2>Mi alquiler</h2>
-
-    <div th:if="${alquiler == null}">
-        <p>No tienes ningún alquiler activo.</p>
-        <a th:href="@{/user/vehiculos}" class="boton">Ver vehículos disponibles</a>
+    <div class="botones">
+        <a th:href="@{/user/alquileres/nuevo}" class="btn">Crear nuevo alquiler</a>
     </div>
 
-    <div th:if="${alquiler != null}" class="tabla-container">
-        <table>
-            <tr>
-                <th>Cliente</th>
-                <th>Vehículo</th>
-                <th>Fecha Inicio</th>
-                <th>Fecha Fin</th>
-                <th>Precio Total</th>
-            </tr>
-            <tr>
-                <td th:text="${cliente.nombre}"></td>
-                <td th:text="${alquiler.vehiculo.matricula}"></td>
-                <td th:text="${alquiler.fechaInicio}"></td>
-                <td th:text="${alquiler.fechaFin}"></td>
-                <td th:text="${#numbers.formatDecimal(alquiler.precioTotal, 1, 2)} + ' €'"></td>
-            </tr>
-        </table>
+    <br>
+
+    <table class="tabla">
+        <thead>
+        <tr>
+            <th>Número Pedido</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Precio</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="a : ${alquileres}">
+            <td th:text="${a.numeroPedido}"></td>
+            <td th:text="${a.fechaInicio}"></td>
+            <td th:text="${a.fechaFin}"></td>
+            <td th:text="${a.precioTotal}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <div class="botones">
+        <a th:href="@{/user}" class="btn">Volver</a>
     </div>
-</div>
+</main>
 
 </body>
 </html>

@@ -1,126 +1,71 @@
 package com.EDOH.AlquilaTusVehiculos.controller;
 
 import com.EDOH.AlquilaTusVehiculos.model.Alquiler;
-import com.EDOH.AlquilaTusVehiculos.model.Cliente;
-import com.EDOH.AlquilaTusVehiculos.model.Vehiculo;
+import com.EDOH.AlquilaTusVehiculos.model.Usuario;
 import com.EDOH.AlquilaTusVehiculos.repository.AlquilerRepository;
-import com.EDOH.AlquilaTusVehiculos.repository.ClienteRepository;
+import com.EDOH.AlquilaTusVehiculos.repository.UsuarioRepository;
 import com.EDOH.AlquilaTusVehiculos.repository.VehiculoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
-    private final ClienteRepository clienteRepository;
-    private final VehiculoRepository vehiculoRepository;
-    private final AlquilerRepository alquilerRepository;
+    @Autowired
+    private AlquilerRepository alquilerRepository;
 
-    public UserController(ClienteRepository clienteRepository,
-                          VehiculoRepository vehiculoRepository,
-                          AlquilerRepository alquilerRepository) {
-        this.clienteRepository = clienteRepository;
-        this.vehiculoRepository = vehiculoRepository;
-        this.alquilerRepository = alquilerRepository;
-    }
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    @GetMapping("/user")
-    public String userHome(Authentication authentication, Model model) {
-        Cliente cliente = obtenerClienteActual(authentication);
-        model.addAttribute("cliente", cliente);
+    @Autowired
+    private VehiculoRepository vehiculoRepository;
+
+    // Página principal usuario
+    @GetMapping("")
+    public String index() {
         return "user/indexCliente";
     }
 
-    @GetMapping("/user/vehiculos")
-    public String verVehiculosDisponibles(Model model) {
-        model.addAttribute("vehiculos", vehiculoRepository.findByDisponibleTrue());
-        return "user/vehiculos";
-    }
+    // Ver alquileres del usuario
+    @GetMapping("/alquileres")
+    public String verAlquileres(Model model, Authentication authentication) {
+        String username = authentication.getName();
+        Usuario usuario = usuarioRepository.findByUsername(username).orElse(null);
 
-    @GetMapping("/user/alquileres")
-    public String verMisAlquileres(Authentication authentication, Model model) {
-        Cliente cliente = obtenerClienteActual(authentication);
-        model.addAttribute("cliente", cliente);
-        model.addAttribute("alquiler", cliente.getAlquiler());
+        List<Alquiler> alquileres = alquilerRepository.findAll()
+                .stream()
+                .filter(a -> a.getUsuario() != null && a.getUsuario().getId().equals(usuario.getId()))
+                .toList();
+
+        model.addAttribute("alquileres", alquileres);
         return "user/alquileres";
     }
 
-    @GetMapping("/user/alquileres/nuevo/{vehiculoId}")
-    public String nuevoAlquilerUsuario(@PathVariable Long vehiculoId,
-                                       Authentication authentication,
-                                       Model model) {
-
-        Cliente cliente = obtenerClienteActual(authentication);
-
-        if (cliente.getAlquiler() != null) {
-            return "redirect:/user/alquileres";
-        }
-
-        Vehiculo vehiculo = vehiculoRepository.findById(vehiculoId)
-                .orElseThrow(() -> new IllegalArgumentException("Vehículo no válido"));
-
-        if (!vehiculo.isDisponible()) {
-            return "redirect:/user/vehiculos";
-        }
-
-        model.addAttribute("cliente", cliente);
-        model.addAttribute("vehiculo", vehiculo);
+    // FORMULARIO NUEVO ALQUILER
+    @GetMapping("/alquileres/nuevo")
+    public String nuevoAlquiler(Model model) {
         model.addAttribute("alquiler", new Alquiler());
-
-        return "user/crearAlquiler";
+        model.addAttribute("vehiculos", vehiculoRepository.findAll());
+        return "user/formAlquiler";
     }
 
-    @PostMapping("/user/alquileres/guardar")
-    public String guardarAlquilerUsuario(@ModelAttribute Alquiler alquiler,
-                                         @RequestParam Long vehiculoId,
-                                         Authentication authentication) {
+    // GUARDAR ALQUILER
+    @PostMapping("/alquileres/guardar")
+    public String guardarAlquiler(@ModelAttribute Alquiler alquiler, Authentication authentication) {
 
-        Cliente cliente = obtenerClienteActual(authentication);
+        String username = authentication.getName();
+        Usuario usuario = usuarioRepository.findByUsername(username).orElse(null);
 
-        if (cliente.getAlquiler() != null) {
-            return "redirect:/user/alquileres";
-        }
-
-        Vehiculo vehiculo = vehiculoRepository.findById(vehiculoId)
-                .orElseThrow(() -> new IllegalArgumentException("Vehículo no válido"));
-
-        if (!vehiculo.isDisponible()) {
-            return "redirect:/user/vehiculos";
-        }
-
-        alquiler.setCliente(cliente);
-        alquiler.setVehiculo(vehiculo);
-        alquiler.setNumeroPedido("PED-" + System.currentTimeMillis());
-
-        long dias = ChronoUnit.DAYS.between(
-                alquiler.getFechaInicio(),
-                alquiler.getFechaFin()
-        );
-
-        if (dias <= 0) dias = 1;
-
-        BigDecimal precioTotal = vehiculo.getPrecioPorDia()
-                .multiply(BigDecimal.valueOf(dias));
-
-        alquiler.setPrecioTotal(precioTotal);
-
-        vehiculo.setDisponible(false);
-        vehiculoRepository.save(vehiculo);
+        alquiler.setUsuario(usuario);
 
         alquilerRepository.save(alquiler);
 
         return "redirect:/user/alquileres";
-    }
-
-    private Cliente obtenerClienteActual(Authentication authentication) {
-        String username = authentication.getName();
-
-        return clienteRepository.findByUsuarioUsername(username)
-                .orElseThrow(() -> new RuntimeException("Usuario sin cliente asociado"));
     }
 }

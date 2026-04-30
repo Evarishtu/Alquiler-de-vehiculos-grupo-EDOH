@@ -1,42 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Zona Cliente</title>
+    <title>Panel usuario</title>
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
-<div class="navbar">
-    <h1>Zona Cliente - AlquilaTusVehiculos</h1>
-    <div class="menu">
-        <a th:href="@{/user}">Inicio</a>
-        <a th:href="@{/user/vehiculos}">Vehículos disponibles</a>
-        <a th:href="@{/user/alquileres}">Mi alquiler</a>
+<header>
+    <h1>AlquilaTusVehiculos</h1>
+</header>
 
-        <form th:action="@{/logout}" method="post" class="logout-form">
-            <button type="submit" class="logout-link">Cerrar sesión</button>
-        </form>
+<main class="login-page">
+    <h2>Panel de usuario</h2>
+
+    <div class="botones">
+        <a th:href="@{/user/vehiculos}" class="btn">Ver vehículos</a>
+        <a th:href="@{/user/alquileres}" class="btn">Mis alquileres</a>
+        <a th:href="@{/logout}" class="btn">Cerrar sesión</a>
     </div>
-</div>
-
-<div class="container">
-    <h2 th:text="'Bienvenido, ' + ${cliente.nombre}"></h2>
-    <p>Desde esta zona puedes consultar vehículos disponibles y revisar tu alquiler.</p>
-</div>
-
-<div class="contenedor">
-
-    <a th:href="@{/user/vehiculos}" class="tarjeta">
-        <img th:src="@{/images/vehiculos.png}" alt="Vehículos" class="icono">
-        <h2>VEHÍCULOS</h2>
-    </a>
-
-    <a th:href="@{/user/alquileres}" class="tarjeta">
-        <img th:src="@{/images/alquileres.png}" alt="Alquileres" class="icono">
-        <h2>MI ALQUILER</h2>
-    </a>
-
-</div>
+</main>
 
 </body>
 </html>
