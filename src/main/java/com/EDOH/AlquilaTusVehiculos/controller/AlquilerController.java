@@ -90,6 +90,7 @@ public class AlquilerController {
     }
     @GetMapping("/eliminar/{id}")
     public String eliminarAlquiler(@PathVariable Long id) {
+
         Alquiler alquiler = alquilerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Id de alquiler no válido: " + id));
 

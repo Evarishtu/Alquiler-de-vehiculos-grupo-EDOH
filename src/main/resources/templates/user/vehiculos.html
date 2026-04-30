@@ -31,6 +31,7 @@
                 <th>Modelo</th>
                 <th>Precio por día</th>
                 <th>Disponible</th>
+                <th>Alquilar</th>
             </tr>
             </thead>
             <tbody>
@@ -40,6 +41,11 @@
                 <td th:text="${vehiculo.modelo}"></td>
                 <td th:text="${vehiculo.precioPorDia} + ' €'"></td>
                 <td>Disponible</td>
+                <td>
+                    <a th:href="@{/user/alquileres/nuevo/{id}(id=${vehiculo.id})}" class="boton">
+                        Alquilar
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>

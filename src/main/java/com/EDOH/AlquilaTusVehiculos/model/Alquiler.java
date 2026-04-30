@@ -25,7 +25,7 @@ public class Alquiler {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal precioTotal;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "cliente_id", nullable = false, unique = true)
     private Cliente cliente;
 
