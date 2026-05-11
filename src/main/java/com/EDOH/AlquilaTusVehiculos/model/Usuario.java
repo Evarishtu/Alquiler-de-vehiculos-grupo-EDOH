@@ -1,6 +1,7 @@
 package com.EDOH.AlquilaTusVehiculos.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "usuarios")
@@ -19,6 +20,7 @@ public class Usuario {
     @Column(nullable = false, length = 20)
     private String rol;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "usuario")
     private Cliente cliente;
 

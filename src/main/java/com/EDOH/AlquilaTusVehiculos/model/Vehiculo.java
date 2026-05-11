@@ -1,6 +1,7 @@
 package com.EDOH.AlquilaTusVehiculos.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 
@@ -30,6 +31,7 @@ public class Vehiculo {
     @Column (nullable = false)
     private boolean disponible = true;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "vehiculo")
     private Alquiler alquiler;
 

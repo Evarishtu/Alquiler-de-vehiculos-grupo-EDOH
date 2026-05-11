@@ -1,6 +1,7 @@
 package com.EDOH.AlquilaTusVehiculos.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "clientes")
@@ -25,6 +26,7 @@ public class Cliente {
     @Column(length = 15)
     private String telefono;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "cliente")
     private Alquiler alquiler;
 
