@@ -4,6 +4,7 @@ import com.EDOH.AlquilaTusVehiculos.model.Usuario;
 import com.EDOH.AlquilaTusVehiculos.repository.UsuarioRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,6 +20,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+                .csrf(csrf -> csrf.disable())
+
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/",
@@ -28,6 +31,19 @@ public class SecurityConfig {
                                 "/images/**"
                         ).permitAll()
 
+                        // Swagger / OpenAPI
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**"
+                        ).permitAll()
+
+                        // API REST securizada
+                        .requestMatchers("/api/clientes/**").hasRole("ADMIN")
+                        .requestMatchers("/api/alquilerVehiculos/**").hasRole("ADMIN")
+                        .requestMatchers("/api/vehiculos/**").hasAnyRole("USER", "ADMIN")
+
+                        // Rutas web de la aplicación
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 
@@ -53,6 +69,7 @@ public class SecurityConfig {
                         })
                         .permitAll()
                 )
+                .httpBasic(Customizer.withDefaults())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
